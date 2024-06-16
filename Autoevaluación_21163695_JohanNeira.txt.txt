@@ -1,0 +1,62 @@
+Escala:
+0: No realizado.
+0.25: Implementación con problemas mayores (funciona 25% de las veces o no funciona)
+0.5: Implementación con funcionamiento irregular (funciona 50% de las veces)
+0.75: Implementación con problemas menores (funciona 75% de las veces)
+1: Implementación completa sin problemas (funciona 100% de las veces)
+
+Requerimientos Funcionales
+
+TDA / Funcion / Puntaje
+
+TDA station-constructor/ station / 1
+TDA section-constructor / section/ 1
+TDA line-constructor / line / 1
+TDA line-otrospredicados / lineLength / 1
+TDA line-otrospredicados / lineSectionLength / 1
+TDA line-modificador / lineAddSection / 1
+TDA line-pertenencia / isLine / 1
+TDA pcar-constructor / pcar / 1
+TDA train-constructor/ train / 1
+TDA train-modificador / trainAddCar / 1
+TDA train-modificador / trainRemoveCar / 1
+TDA train-pertenencia / isTrain / 1
+TDA line-otrospredicados / trainCapacity / 1
+TDA driver-constructor / driver / 1
+TDA subway-constructor / subway / 1
+TDA subway-modificador/ subwayAddTrain / 1 
+TDA subway-modificador / subwayAddLine / 1
+TDA subway-modificador / subwayAddDriver / 1
+TDA subway-otrospredicados / subwayToString / 1
+TDA subway-modificador / subwaySetStationStoptime / 0
+TDA subway-modificador / subwayAssignTrainToLine / 0
+TDA subway-modificador / subwayAssignDriverToTrain/ 0
+TDA subway-otrospredicados/ whereIsTrain / 0
+TDA subway-otrospredicados / subwayTrainPath / 0
+
+Requerimientos no Funcionales
+
+TDA / Funcion / Puntaje
+
+TDA line / addElementToInicio / 1
+TDA line / addtofinal / 1
+TDA line / last / 1
+TDA line / first / 1
+TDA line / distanceline / 1
+TDA line / costline / 1
+TDA line / liststation / 1
+TDA line / listnotrepetidos/ 1
+TDA line / lengthline / 1
+TDA line / linesectionstation1 / 1
+TDA line / linesectionstation2 / 1
+TDA line / equalsection / 1
+TDA line / equaltypefirstlaststation/ 1
+TDA line / equalnamefirstlastsation / 1
+TDA line / sectionconsistence / 1
+TDA train / addcarposition / 1
+TDA train / removecarposition / 1
+TDA train / extremeequaltr / 1
+TDA train / sinfinal / 1
+TDA train / sinextremos / 1
+TDA train / trainconsinstence / 1
+TDA train / capacitytrain / 1

@@ -1,0 +1,9 @@
+Para la ejecucion correcta del programa siga las siguientes intrucciones:
+
+1) Debe abrir SWI-Prolog y seguir la siguiente ruta para que al consultar no falle el programa, File->Consult->Lab2_NeiraJans_21163695->Codigofuente_21163695_JohanNeira->tdasubway_21163695_neirajans.pl, si o si debe consultar en el archivo tdasubway_21163695_neirajans.pl, ya que todos los archivos estan importados en cadena hacia este.
+2) Debe ejecutar la siguiente linea en Prolog "set_prolog_flag(answer_write_options,[max_depth(0)]).", para que asi muestre todas las respuestas y no las resuma.
+3) Debe dejar comentado las consultas las cuales arrojan falso, para analizar las consultas que retornan tru y ejecutar directamente.
+4) Para los casos que sean falsos debe seguir la siguiente ruta Pegar-la-consulta->Descomentar-una-consulta-falso->ejecturar-la-consulta->volver-a-comentar-la-consulta-ejecutada->Pasar-a-la-siguiente-consulta-falso->Repetir-el-proceso.
+
+Nota1: Para la correcta ejecucion los Type de las estaciones deben ir con " " al consultar.
+Nota2: Se recomienda ejecutar el script de prueba 1 y al final de su ejecucion el script de prueba 2, ya que el script de prueba 2 consta de 2 subway por lo tanto tambien se recomienda ejecutarlos por separados. 
