@@ -1,3 +1,1 @@
-# Lab3_NeiraJans_21163695
-
-Se avanzo bastante
+# Laboratorio N°3 Paradigma Orientado a Objetos
