@@ -1,1 +1,1 @@
-# Laboratorio N°3 Paradigma Orientado a Objetos..
+# Laboratorio N°3 Paradigma Orientado a Objetos

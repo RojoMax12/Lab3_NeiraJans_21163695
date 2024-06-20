@@ -12,51 +12,47 @@ TDA / Funcion / Puntaje
 TDA station-constructor/ station / 1
 TDA section-constructor / section/ 1
 TDA line-constructor / line / 1
-TDA line-otrospredicados / lineLength / 1
-TDA line-otrospredicados / lineSectionLength / 1
-TDA line-modificador / lineAddSection / 1
-TDA line-pertenencia / isLine / 1
-TDA pcar-constructor / pcar / 1
+TDA line-line-length / lineLength / 1
+TDA line-line-section-length / lineSectionLength / 1
+TDA line-line-cost / linecost / 1
+TDA line-line-section-cost / linesectioncost / 1
+TDA line-line-add-section / lineaddsection / 1
+TDA line-line? / line? / 1
+TDA PassengerCar -constructor / PassengerCar / 1
 TDA train-constructor/ train / 1
-TDA train-modificador / trainAddCar / 1
-TDA train-modificador / trainRemoveCar / 1
-TDA train-pertenencia / isTrain / 1
-TDA line-otrospredicados / trainCapacity / 1
+TDA train-addCar / addCar / 1
+TDA train-removeCar / removeCar / 1
+TDA train-isTrain / isTrain / 1
+TDA train-fetchCapacity / fetchCapacity / 1
 TDA driver-constructor / driver / 1
 TDA subway-constructor / subway / 1
-TDA subway-modificador/ subwayAddTrain / 1 
-TDA subway-modificador / subwayAddLine / 1
-TDA subway-modificador / subwayAddDriver / 1
-TDA subway-otrospredicados / subwayToString / 1
-TDA subway-modificador / subwaySetStationStoptime / 0
-TDA subway-modificador / subwayAssignTrainToLine / 0
-TDA subway-modificador / subwayAssignDriverToTrain/ 0
-TDA subway-otrospredicados/ whereIsTrain / 0
-TDA subway-otrospredicados / subwayTrainPath / 0
+TDA subway-addTrain/ addTrain / 1 
+TDA subway-addLine / addLine / 1
+TDA subway-addDriver / addDriver / 1
+TDA subway-toString / toString / 1
+TDA subway-assignTrainToLine / assignTrainToLine / 1
+TDA subway-assignDriverToTrain / assignDriverToTrain / 1
+TDA subway-whereIsTrain / whereIsTrain/ 0
+TDA subway-trainPath/ trainPath / 0
 
 Requerimientos no Funcionales
 
 TDA / Funcion / Puntaje
 
-TDA line / addElementToInicio / 1
-TDA line / addtofinal / 1
-TDA line / last / 1
-TDA line / first / 1
-TDA line / distanceline / 1
-TDA line / costline / 1
-TDA line / liststation / 1
-TDA line / listnotrepetidos/ 1
-TDA line / lengthline / 1
-TDA line / linesectionstation1 / 1
-TDA line / linesectionstation2 / 1
-TDA line / equalsection / 1
-TDA line / equaltypefirstlaststation/ 1
-TDA line / equalnamefirstlastsation / 1
-TDA line / sectionconsistence / 1
-TDA train / addcarposition / 1
-TDA train / removecarposition / 1
-TDA train / extremeequaltr / 1
-TDA train / sinfinal / 1
-TDA train / sinextremos / 1
-TDA train / trainconsinstence / 1
-TDA train / capacitytrain / 1
+
+TDA line / consistencias / 1
+TDA line / linecirular / 1
+TDA line / linenormal / 1
+TDA train / trainconsistence / 1
+TDA subway / loadFromFileSubway / 1
+TDA subway / loadFromFileTrain / 1
+TDA subway / loadFromFileDriver / 1
+TDA subway / loadFromFileCombination/ 1
+TDA menu / showMenu / 1
+TDA menu / option1 / 1
+TDA menu / option2 / 1
+TDA menu / option3 / 1
+TDA menu / displayOptionsInicio/ 1
+TDA menu / displayOptionsOption1 / 1
+TDA menu / displayOptionsOption2 / 1
+TDA menu / displayOptionsOption3 / 1
