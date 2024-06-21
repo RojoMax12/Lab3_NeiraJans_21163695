@@ -1,0 +1,12 @@
+STATION 4 EstacionD C 8
+STATION 10 EstacionJ C 8
+SECTION EstacionD EstacionJ 20.5f 30.0f
+SECTION EstacionJ EstacionD 20.5f 30.0f
+LINE 00 Linea0A F-200
+
+STATION 16 EstacionP C 8
+STATION 10 EstacionJ C 8
+SECTION EstacionP EstacionJ 20.5f 30.0f
+SECTION EstacionJ EstacionP 20.5f 30.0f
+LINE 11 Linea1A F-150
+

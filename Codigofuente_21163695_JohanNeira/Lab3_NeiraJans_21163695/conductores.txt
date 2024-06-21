@@ -1,0 +1,14 @@
+DRIVER 0 Johan Elpepe
+STATION 1 EstacionA T 10
+STATION 1 EstacionA T 10
+TRAIN 0 1:30:00 EstacionA EstacionA
+
+DRIVER 1 Felipe UWU2
+STATION 1 EstacionG T 10
+STATION 6 EstacionL T 15
+TRAIN 1 1:40:00 EstacionG EstacionL
+
+DRIVER 2 Nelson EsteSech
+STATION 1 EstacionG T 10
+STATION 6 EstacionL T 15
+TRAIN 2 2:30:00 EstacionG EstacionL

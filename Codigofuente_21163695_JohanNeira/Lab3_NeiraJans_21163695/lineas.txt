@@ -1,0 +1,41 @@
+Linea0
+STATION 1 EstacionA T 10
+STATION 2 EstacionB R 15
+STATION 3 EstacionC M 12
+STATION 4 EstacionD C 8
+STATION 5 EstacionE R 10
+SECTION EstacionA EstacionB 20.5f 30.0f
+SECTION EstacionB EstacionC 20.5f 30.0f
+SECTION EstacionC EstacionD 20.5f 30.0f
+SECTION EstacionD EstacionE 20.5f 30.0f
+SECTION EstacionE EstacionA 20.5f 30.0f
+LINE 0 Linea0 F-200
+
+Linea1
+STATION 6 EstacionG T 10
+STATION 7 EstacionH R 15
+STATION 8 EstacionI M 12
+STATION 9 EstacionJ C 8
+STATION 10 EstacionK R 10
+STATION 11 EstacionL T 15
+SECTION EstacionG EstacionH 20.5f 30.0f
+SECTION EstacionH EstacionI 20.5f 30.0f
+SECTION EstacionJ EstacionK 20.5f 30.0f
+SECTION EstacionK EstacionL 20.5f 30.0f
+LINE 1 Linea1 F-300
+
+Linea2
+STATION 12 EstacionM T 10
+STATION 13 EstacionN R 15
+STATION 14 EstacionO M 12
+STATION 15 EstacionP C 8
+STATION 16 EstacionQ R 10
+SECTION EstacionM EstacionN 20.5f 30.0f
+SECTION EstacionN EstacionO 20.5f 30.0f
+SECTION EstacionO EstacionP 20.5f 30.0f
+SECTION EstacionP EstacionQ 20.5f 30.0f
+LINE 2 Linea2 F-300
+
+SUBWAY 1 MetroSantiago
+
+
