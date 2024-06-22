@@ -1,6 +1,4 @@
 package org.example;
-import org.example.TDAMenu.Menu;
-import org.example.TDASubway.Subway;
 
 
 public class Main {

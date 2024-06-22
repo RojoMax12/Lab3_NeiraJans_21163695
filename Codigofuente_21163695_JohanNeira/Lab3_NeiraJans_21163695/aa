@@ -1,8 +1,3 @@
-Date date = new Date();
-        date.setHours(1);
-        date.setMinutes(30);
-        date.setSeconds(0);
-
         //Station
         Station station1 = new Station(1, "Estación A", StationType.R, 10);
         Station station2 = new Station(2, "Estación B", StationType.T, 15);
@@ -45,7 +40,6 @@ Date date = new Date();
         lineList1.add(linea2);
 
         //PassengerCar
-
         PassengerCar passengerCar1 = new PassengerCar(1, 300, "UWU", "SEBA", CarType.TR);
         PassengerCar passengerCar2 = new PassengerCar(2, 200, "UWU", "SEBA", CarType.CT);
         PassengerCar passengerCar3 = new PassengerCar(3, 400, "UWU", "SEBA", CarType.CT);
@@ -53,7 +47,6 @@ Date date = new Date();
         PassengerCar passengerCar5 = new PassengerCar(5, 600, "UWU", "SEBA", CarType.TR);
 
         //PassergerCarlist
-
         List<PassengerCar> passengerCarList = new ArrayList<>();
         passengerCarList.add(passengerCar1);
         passengerCarList.add(passengerCar2);
@@ -67,7 +60,6 @@ Date date = new Date();
         passengerCarList1.add(passengerCar5);
 
         //Train
-
         Train train1 = new Train(1,"UWU2",300, passengerCarList);
         Train train2 = new Train(2,"EsteSech",500, passengerCarList1);
 
@@ -80,7 +72,6 @@ Date date = new Date();
         trainList1.add(train2);
 
         //Driver
-
         Driver driver = new Driver(1, "Johan", "UWU");
         Driver driver1 = new Driver(2, "Nelson", "UWU1");
         Driver driver2 = new Driver(2, "Pipe", "UWU2");
@@ -89,65 +80,3 @@ Date date = new Date();
         List <Driver> driverList = new ArrayList<>();
         driverList.add(driver);
         driverList.add(driver1);
-
-        List<Driver> driverList1 = new ArrayList<>();
-        driverList1.add(driver2);
-
-        /*
-        * // Datos linea 1
-        System.out.println("Estaciones linea 1:");
-        mostrarEstacion(station1);
-        mostrarEstacion(station2);
-        mostrarEstacion(station3);
-        mostrarEstacion(station4);
-        mostrarEstacion(station5);
-        mostrarEstacion(station6);
-
-        System.out.println("La distancia total de la linea 1 es de:" + linea1.line_length());
-        System.out.println("La distancia entre la Estacion A y la Estacion D es de:" + linea1.line_section_length("Estación A","Estación D"));
-        System.out.println("El costo total de la linea 1  es de:" + linea1.line_cost());
-        System.out.println("El costo entre la Estancion A y la Estacion D es de: " + linea1.line_section_cost("Estación A", "Estación D"));
-        linea1.line_add_section(section4);
-        System.out.println(linea1);
-        System.out.println(linea1.isline(linea1));
-        System.out.println(linea2.isline(linea2));
-
-        //Datos linea 2
-        System.out.println("Estaciones linea 2:");
-        mostrarEstacion(station1);
-        mostrarEstacion(station2);
-        mostrarEstacion(station3);
-        mostrarEstacion(station4);
-
-        System.out.println(linea2.isline(linea2));
-        System.out.println("La distancia total de la linea 2 es de:" + linea2.line_length());
-        System.out.println("La distancia entre la Estacion A y la Estacion C es de:" + linea2.line_section_length("Estación A","Estación C"));
-        System.out.println("El costo total de la linea 2  es de:" + linea2.line_cost());
-        System.out.println("El costo entre la Estancion A y la Estacion C es de: " + linea2.line_section_cost("Estación A", "Estación C"));
-
-
-        System.out.println(train1);
-        System.out.println(train2);
-        System.out.println(train2.fetchCapacity(train2));
-        System.out.println(train1.isTrain(train1));
-        System.out.println(train2.isTrain(train2));
-        *
-        *
-        *
-        *
-        * System.out.println(subway1.toString(subway1));
-
-        * */
-
-
-
-        //Crear Subway
-        Subway subway1 = new Subway(1,"Elpepe");
-        subway1.addTrain(trainList);
-        subway1.addTrain(trainList1);
-        subway1.addDriver(driverList);
-        subway1.addDriver(driverList1);
-        subway1.addLine(lineList);
-        subway1.addLine(lineList1);
-        subway1.assignTrainToLine(train1, linea1);
-        subway1.assignDriverToTrain(train1, driver2, date, station1, station6);
