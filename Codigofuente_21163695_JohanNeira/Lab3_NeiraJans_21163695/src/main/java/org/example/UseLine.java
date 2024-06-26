@@ -42,7 +42,7 @@ public interface UseLine {
      * @param section
      * @return Line
      */
-    public Line line_add_section(Section section);
+    public void line_add_section(Section section);
 
     /**
      * Nombre isline

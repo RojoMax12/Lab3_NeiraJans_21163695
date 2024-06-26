@@ -75,15 +75,6 @@ public class Train implements UseTrain {
     }
 
     /**
-     * Nombre setDriverList
-     * Descripcion Método que cambia la lista de conductores de un tren
-     * @param driverList
-     */
-    public void setDriverList(List<Driver> driverList) {
-        this.driverList = driverList;
-    }
-
-    /**
      * Nombre getDepartureDate
      * Descripcion Método que obtiene el tiempo de salida de un tren
      * @return departureDate
@@ -129,15 +120,6 @@ public class Train implements UseTrain {
     }
 
     /**
-     * Nombre getArrivalStation
-     * Descripcion Método que cambia la estacion de llegada de un tren
-     * @return arrivalStation
-     */
-    public List<Station> getArrivalStation() {
-        return arrivalStation;
-    }
-
-    /**
      * Nombre setArrivalStation
      * Descripcion Método que cambia la estacion de llegada de un tren
      * @param arrivalStation
@@ -165,7 +147,7 @@ public class Train implements UseTrain {
      * @return Train
      */
     @Override
-    public Train addCar(PassengerCar passengerCar, int position) {
+    public void addCar(PassengerCar passengerCar, int position) {
 
         List<PassengerCar> newCarList = new ArrayList<>(getCarList());
 
@@ -174,8 +156,8 @@ public class Train implements UseTrain {
         }
 
         newCarList.add(position, passengerCar);
+        setCarList(new ArrayList<>(newCarList));
 
-        return new Train(getId(), getTrainMaker(), getSpeed(), newCarList);
     }
 
     /**
@@ -186,7 +168,7 @@ public class Train implements UseTrain {
      * @return Train
      */
     @Override
-    public Train removeCar(Train train, int position) {
+    public void removeCar(Train train, int position) {
 
         List<PassengerCar> currentCarList = train.getCarList();
 
@@ -198,8 +180,7 @@ public class Train implements UseTrain {
         List<PassengerCar> newCarList = new ArrayList<>(currentCarList);
 
         newCarList.remove(position);
-
-        return new Train(train.getId(), train.getTrainMaker(), train.getSpeed(), newCarList);
+        setCarList(newCarList);
     }
 
     /**

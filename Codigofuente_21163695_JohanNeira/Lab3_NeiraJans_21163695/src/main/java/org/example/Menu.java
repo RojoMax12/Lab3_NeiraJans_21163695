@@ -16,6 +16,24 @@ public class Menu implements UseMenu {
     }
 
 
+    /**
+     * Nombre getUserChoice1
+     * Descripcion  Método que obtiene un int por linea de comando
+     * @return scanner.nextInt()
+     */
+    public int getUserChoice1() {
+        while (!scanner.hasNextInt()) {
+            System.out.print("Entrada no válida. Por favor, introduce un número: "); // Mensaje en caso de entrada no válida
+            scanner.next(); // Consumir la entrada no válida
+        }
+        return scanner.nextInt();
+    }
+
+    /**
+     * Nombre getTimeFromUser
+     * Descripcion  Método que obtiene un Date por linea de comando
+     * @return time
+     */
     public Date getTimeFromUser() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         sdf.setLenient(false); // Para asegurarse de que el formato sea estricto
@@ -76,9 +94,10 @@ public class Menu implements UseMenu {
      * Nombre showMenu
      * Descripcion  Método que muestra el Menu pricipal
      * @param subway
+     * @param Passengercarlit
      */
     @Override
-    public void showMenu(Subway subway) {
+    public void showMenu(Subway subway, List<PassengerCar> Passengercarlit) {
         boolean exit = false;
         CargaDedatos cargaDedatos = new CargaDedatos(subway);
 
@@ -97,14 +116,14 @@ public class Menu implements UseMenu {
                     break;
                 case 3:
                     System.out.print("\033c");
-                    option3(cargaDedatos.getSubway(),cargaDedatos);
+                    option3(cargaDedatos.getSubway(),cargaDedatos, Passengercarlit);
                     break;
                 case 4:
                     exit = true;
                     System.out.println("Saliendo...");
                     break;
                 default:
-                    System.out.println("Opción no válida, por favor intenta nuevamente.");
+                    System.out.print("Opción no válida, por favor intenta nuevamente.");
             }
         }
 
@@ -143,6 +162,9 @@ public class Menu implements UseMenu {
                         System.out.print("\033c");
                         exit = true;
                         break;
+                    case 6:
+                        System.out.print("\033c");
+                        break;
                     default:
                         System.out.println("Opción no válida, por favor intenta nuevamente.");
                 }
@@ -165,7 +187,7 @@ public class Menu implements UseMenu {
 
             switch (choice) {
                 case 1:
-                    System.out.println(subway.toString(subway));
+                    System.out.println(subway.toString());
                     break;
                 case 2:
                     System.out.print("\033c");
@@ -182,9 +204,10 @@ public class Menu implements UseMenu {
      * Descripcion  Método que genera un menu y ademas muestra de la opcion3 del Menu principal
      * @param subway
      * @param cargaDedatos
+     * @param passengerCarList
      */
     @Override
-    public void option3(Subway subway, CargaDedatos cargaDedatos) {
+    public void option3(Subway subway, CargaDedatos cargaDedatos, List<PassengerCar> passengerCarList) {
         boolean exit = false;
 
         while (!exit) {
@@ -193,85 +216,92 @@ public class Menu implements UseMenu {
 
             switch (choice) {
                 case 1:
-                    System.out.println("Ingrese el ID de la línea que desea calcular la distancia total:");
-                    int lineId1 = getUserChoice();
-                    System.out.println("La distancia total de la línea " + lineId1 + " es de: " + subway.getLines().get(lineId1).line_length());
+                    System.out.print("Ingrese el ID de la línea que desea calcular la distancia total: ");
+                    int lineId1 = getUserChoice1() - 1;
+                    System.out.println("La distancia total de la línea " + subway.getLines().get(lineId1).getId() + " es de: " + subway.getLines().get(lineId1).line_length());
                     break;
 
                 case 2:
-                    System.out.println("Ingrese el ID de la línea que desea calcular la distancia por tramos:");
-                    int lineId2 = getUserChoice();
+                    System.out.print("Ingrese el ID de la línea que desea calcular la distancia por tramos: ");
+                    int lineId2 = getUserChoice1() - 1;
                     String[] strings = obtenerStrings();
-                    System.out.println("La distancia total del tramo " + strings[0] + " a " + strings[1] + " en la línea " + lineId2 + " es de: " + subway.getLines().get(lineId2).line_section_length(strings[0], strings[1]));
+                    System.out.println("La distancia total del tramo " + strings[0] + " a " + strings[1] + " en la línea " + subway.getLines().get(lineId2).getId() + " es de: " + subway.getLines().get(lineId2).line_section_length(strings[0], strings[1]));
                     break;
 
                 case 3:
-                    System.out.println("Ingrese el ID de la línea que desea calcular el costo total:");
-                    int lineId3 = getUserChoice();
-                    System.out.println("El costo total de la línea " + lineId3 + " es de: " + subway.getLines().get(lineId3).line_cost());
+                    System.out.print("Ingrese el ID de la línea que desea calcular el costo total: ");
+                    int lineId3 = getUserChoice1() - 1;
+                    System.out.println("El costo total de la línea " + subway.getLines().get(lineId3).getId() + " es de: " + subway.getLines().get(lineId3).line_cost());
                     break;
 
                 case 4:
-                    System.out.println("Ingrese el ID de la línea que desea calcular el costo por tramos:");
-                    int lineId4 = getUserChoice();
+                    System.out.print("Ingrese el ID de la línea que desea calcular el costo por tramos: ");
+                    int lineId4 = getUserChoice1() - 1;
                     String[] strings1 = obtenerStrings();
-                    System.out.println("El costo total del tramo " + strings1[0] + " a " + strings1[1] + " en la línea " + lineId4 + " es de: " + subway.getLines().get(lineId4).line_section_cost(strings1[0], strings1[1]));
+                    System.out.println("El costo total del tramo " + strings1[0] + " a " + strings1[1] + " en la línea " + subway.getLines().get(lineId4).getId() + " es de: " + subway.getLines().get(lineId4).line_section_cost(strings1[0], strings1[1]));
                     break;
 
                 case 5:
-                    System.out.println("Ingrese el ID de la línea para determinar si cumple los requisitos:");
-                    int lineId5 = getUserChoice();
+                    System.out.print("Ingrese el ID de la línea para determinar si cumple los requisitos: ");
+                    int lineId5 = getUserChoice1() - 1;
                     System.out.println("¿La línea " + subway.getLines().get(lineId5).getId() + " cumple los requisitos de ser una línea?: " + subway.getLines().get(lineId5).isline(subway.getLines().get(lineId5)));
                     break;
 
                 case 6:
-                    System.out.println("Ingrese el ID de el tren a modificar:");
-                    int trainId6 = getUserChoice();
-                    System.out.println("\n");
-                    System.out.println("Lista de PassagerCar: "+cargaDedatos.getPassengerCarList().toString());
-                    int position = getUserChoice();
-                    subway.getTrains().get(trainId6).addCar(cargaDedatos.getPassengerCarList().get(trainId6), position);
+                    System.out.print("Ingrese el ID de el tren a modificar: ");
+                    int trainId6 = getUserChoice1() - 1;
+                    System.out.println("Lista de PassagerCar disponibles, elija uno: " + passengerCarList.toString());
+                    int passercaruse = getUserChoice1() - 1;
+                    System.out.print("En que posicion de los vagones del tren desea introducirlo el vagon seleccionado, tenga encuenta que empieza desde el 0 la posicion: ");
+                    int position = getUserChoice1();
+                    List<PassengerCar> generallist = new ArrayList<>();
+                    generallist.addAll(passengerCarList);
+                    generallist.addAll(cargaDedatos.getPassengerCarList());
+                    subway.getTrains().get(trainId6).addCar(generallist.get(passercaruse), position);
+                    System.out.println("Tren modificado");
                     break;
 
                 case 7:
-                    System.out.println("Ingrese el ID de el tren a modificar:");
-                    int trainId7 = getUserChoice();
-                    System.out.println("\n");
-                    int positionremove = getUserChoice();
+                    System.out.print("Ingrese el ID de el tren a modificar: ");
+                    int trainId7 = getUserChoice1() - 1;
+                    System.out.print("Ingrese la posicion del vagon que desea remover, tenga encuenta que empieza desde el 0 la posicion: ");
+                    int positionremove = getUserChoice1();
                     subway.getTrains().get(trainId7).removeCar(subway.getTrains().get(trainId7), positionremove);
+                    System.out.println("Tren modificado");
                     break;
 
                 case 8:
-                    System.out.println("Ingrese el ID de el tren a para determinar si cumple los requisitos:");
-                    int trainId8 = getUserChoice();
+                    System.out.print("Ingrese el ID de el tren a para determinar si cumple los requisitos: ");
+                    int trainId8 = getUserChoice1() - 1;
                     System.out.println("El tren"+subway.getTrains().get(trainId8).getId() + "cumple los requisitos?: " + subway.getTrains().get(trainId8).isTrain(subway.getTrains().get(trainId8)));
                     break;
                 case 9:
-                    System.out.println("Ingrese el ID de el tren que desea saber su capacidad maxima:");
-                    int trainId9 = getUserChoice();
+                    System.out.print("Ingrese el ID de el tren que desea saber su capacidad maxima: ");
+                    int trainId9 = getUserChoice1() - 1;
                     System.out.println("La capacidad maxima del Tren"+subway.getTrains().get(trainId9).getId() + "es de: " + subway.getTrains().get(trainId9).fetchCapacity());
                     break;
                 case 10:
-                    System.out.println("Ingrese el ID de el tren que saber donde se encuentra");
-                    int trainId10 = getUserChoice();
+                    System.out.print("Ingrese el ID de el tren que saber donde se encuentra: ");
+                    int trainId10 = getUserChoice1() - 1;
                     Train train = subway.getTrains().get(trainId10);
                     Date date = getTimeFromUser();
                     subway.whereIsTrain(train, date);
                     break;
                 case 11:
-                    System.out.println("Ingrese el ID de el tren que saber donde se encuentra");
-                    int trainId11 = getUserChoice();
+                    System.out.print("Ingrese el ID de el tren que saber donde se encuentra: ");
+                    int trainId11 = getUserChoice1() - 1;
                     Train train1 = subway.getTrains().get(trainId11);
                     Date date1 = getTimeFromUser();
                     System.out.println("El recorrido faltante del tren es: " + subway.trainPath(train1, date1).toString());
                     break;
-
                 case 12:
                     System.out.print("\033c");
                     exit = true;
                     System.out.println("Saliendo...");
                     break;
-
+                case 13:
+                    System.out.print("\033c");
+                    break;
                 default:
                     System.out.println("Opción no válida, por favor intenta nuevamente.");
             }
@@ -309,6 +339,7 @@ public class Menu implements UseMenu {
         System.out.println("3. Definición de trenes con distintos número de carros (cargar archivo trenes.txt)");
         System.out.println("4. Conductores asignados a una Línea (cargar archivo conductores.txt)");
         System.out.println("5. Retorno al menú de Inicio");
+        System.out.println("6. Borrar la Pantalla");
     }
 
 
@@ -347,6 +378,7 @@ public class Menu implements UseMenu {
         System.out.println("10. Subway - whereIsTrain: determina la ubicación de un tren a partir de una hora indicada del día.");
         System.out.println("11. Subway - trainPath: armar el recorrido del tren a partir de una hora especificada y que retorna la lista de estaciones futuras por recorrer.");
         System.out.println("12. Retorno al menú de Inicio");
+        System.out.println("13. Borrar la pantalla");
     }
 
 

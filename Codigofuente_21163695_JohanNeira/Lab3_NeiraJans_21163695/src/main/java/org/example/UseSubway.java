@@ -29,10 +29,9 @@ public interface UseSubway {
     /**
      * Nombre toString
      * Descripcion Método que muestra el subway completo
-     * @param subway
      * @return String
      */
-    public String toString(Subway subway);
+    public String toString();
 
     /**
      * Nombre assignTrainToLine
@@ -52,4 +51,22 @@ public interface UseSubway {
      * @param arrivalStation
      */
     public void assignDriverToTrain(Train train, Driver driver, Date departureTime, Station departureStation, Station arrivalStation);
+
+
+    /**
+     * Nombre whereIsTrain
+     * Descripcion Método que permite determinar dónde se encuentra un tren a partir de una hora indicada del día.
+     * @param train
+     * @param time
+     */
+    public void whereIsTrain(Train train, Date time);
+
+    /**
+     * Nombre trainPath
+     * Descripcion Método que permite ir armando el recorrido del tren a partir de una hora especificada y que retorna la lista de estaciones futuras por recorrer.
+     * @param train
+     * @param time
+     * @return
+     * */
+    public List<Station> trainPath(Train train, Date time);
 }

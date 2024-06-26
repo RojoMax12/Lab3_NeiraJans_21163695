@@ -11,7 +11,7 @@ public interface UseTrain {
      * @param position
      * @return Train
      */
-    public Train addCar(PassengerCar passengerCar, int position);
+    public void addCar(PassengerCar passengerCar, int position);
 
     /**
      * Nombre removeCar
@@ -20,7 +20,7 @@ public interface UseTrain {
      * @param position
      * @return Train
      */
-    public Train removeCar(Train train, int position);
+    public void removeCar(Train train, int position);
 
     /**
      * Nombre isTrain

@@ -6,6 +6,15 @@ public interface UseCargaDedatos {
 
     /**
      * @Nombre loadFromFileTrain
+     * @Descripcion Metodo que carga las lineas a la Red de metro y el la Red de Metro
+     * @param scanner
+     * @param subway
+     * @return Subway
+     */
+    public Subway loadFromFileSubway(Scanner scanner, Subway subway);
+
+    /**
+     * @Nombre loadFromFileTrain
      * @Descripcion Metodo que carga datos los trenes a la Red de metro y a la lineas correspondientes
      * @param scanner
      * @param subway

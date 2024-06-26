@@ -1,14 +1,24 @@
-DRIVER 0 Johan Elpepe
-STATION 1 EstacionA T 10
-STATION 1 EstacionA T 10
-TRAIN 0 1:30:00 EstacionA EstacionA
+DRIVER 6 James MakerD
+STATION 32 Cerrillos T 120
+STATION 41 LosLeones T 120
+TRAIN 6 2:00:00 Cerrillos LosLeones
 
-DRIVER 1 Felipe UWU2
-STATION 1 EstacionG T 10
-STATION 6 EstacionL T 15
-TRAIN 1 1:40:00 EstacionG EstacionL
+DRIVER 7 Michael MakerE
+STATION 42 UniversidadDeChile T 120
+STATION 51 SanAlbertoHurtado T 120
+TRAIN 7 2:30:00 UniversidadDeChile SanAlbertoHurtado
 
-DRIVER 2 Nelson EsteSech
-STATION 1 EstacionG T 10
-STATION 6 EstacionL T 15
-TRAIN 2 2:30:00 EstacionG EstacionL
+DRIVER 8 Emma MakerF
+STATION 52 Tobalaba T 20
+STATION 61 PedroAguirreCerda T 18
+TRAIN 8 3:00:00 Tobalaba PedroAguirreCerda
+
+DRIVER 9 Olivia MakerG
+STATION 62 LaCisterna T 120
+STATION 71 SantaIsabel T 120
+TRAIN 9 3:30:00 LaCisterna SantaIsabel
+
+DRIVER 10 Lucas MakerH
+STATION 72 Tobalaba T 120
+STATION 81 HospitalElisaCorrea T 120
+TRAIN 10 4:00:00 Tobalaba HospitalElisaCorrea

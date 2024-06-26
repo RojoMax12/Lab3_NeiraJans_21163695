@@ -45,15 +45,6 @@ public class Line implements UseLine {
     }
 
     /**
-     * Nombre getRail_type
-     * Descripcion Metodo que obtiene el rail_type de un Line
-     * @return rail_type
-     */
-    public String getRail_type() {
-        return rail_type;
-    }
-
-    /**
      * Nombre getSections
      * Descripcion Metodo que obtiene la lista de secciones de un Line
      * @return sections
@@ -69,6 +60,15 @@ public class Line implements UseLine {
      */
     public List<Train> getListTrain() {
         return ListTrain;
+    }
+
+    /**
+     * Nombre setSections
+     * Descripcion Metodo que cambia la lista de secciones en Line
+     * @param sections
+     */
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 
     /**
@@ -97,28 +97,49 @@ public class Line implements UseLine {
     public float line_section_length(String station1_name, String station2_name) {
         float sectionLength = 0;
         boolean foundFirstStation = false;
+        boolean station1Exists = false;
+        boolean station2Exists = false;
 
-        for (int i = 0; i < getSections().size(); i++) {
-            Section currentSection = getSections().get(i);
-
-            if (!foundFirstStation && currentSection.getPoint1().getName().equals(station1_name)) {
-                sectionLength += currentSection.getDistance();
+        for (Section currentSection : getSections()) {
+            // Check if the current section contains the first station
+            if (!foundFirstStation && (currentSection.getPoint1().getName().equals(station1_name) || currentSection.getPoint2().getName().equals(station1_name))) {
                 foundFirstStation = true;
+                station1Exists = true;
 
-                if (currentSection.getPoint2().getName().equals(station2_name)) {
+                // Add distance only if station1_name is in point1
+                if (currentSection.getPoint1().getName().equals(station1_name)) {
+                    sectionLength += currentSection.getDistance();
+                }
+
+                // If the second station is also in the same section, return the length
+                if (currentSection.getPoint1().getName().equals(station2_name) || currentSection.getPoint2().getName().equals(station2_name)) {
+                    station2Exists = true;
+                    return sectionLength;
+                }
+            } else if (foundFirstStation) {
+                // Keep adding the length until we find the second station
+                sectionLength += currentSection.getDistance();
+                if (currentSection.getPoint1().getName().equals(station2_name) || currentSection.getPoint2().getName().equals(station2_name)) {
+                    station2Exists = true;
                     return sectionLength;
                 }
             }
 
-            if (foundFirstStation && currentSection.getPoint2().getName().equals(station2_name)) {
-                sectionLength += currentSection.getDistance();
-                return sectionLength;
+            // Check if the current section contains station2_name
+            if (currentSection.getPoint1().getName().equals(station2_name) || currentSection.getPoint2().getName().equals(station2_name)) {
+                station2Exists = true;
             }
         }
 
+        // Check if both stations exist
+        if (!station1Exists || !station2Exists) {
+            System.out.println("Una o ambas estaciones no existen.");
+            return -1;
+        }
+
+        // If we reach here, either the stations are not in the same line or in the correct order
         return sectionLength;
     }
-
 
 
     /**
@@ -147,25 +168,47 @@ public class Line implements UseLine {
     public float line_section_cost(String station1_name, String station2_name) {
         float sectionCost = 0;
         boolean foundFirstStation = false;
+        boolean station1Exists = false;
+        boolean station2Exists = false;
 
-        for (int i = 0; i < getSections().size(); i++) {
-            Section currentSection = getSections().get(i);
-
-            if (!foundFirstStation && currentSection.getPoint1().getName().equals(station1_name)) {
-                sectionCost += currentSection.getCost();
+        for (Section currentSection : getSections()) {
+            // Check if the current section contains the first station
+            if (!foundFirstStation && (currentSection.getPoint1().getName().equals(station1_name) || currentSection.getPoint2().getName().equals(station1_name))) {
                 foundFirstStation = true;
+                station1Exists = true;
 
-                if (currentSection.getPoint2().getName().equals(station2_name)) {
+                // Add cost only if station1_name is in point1
+                if (currentSection.getPoint1().getName().equals(station1_name)) {
+                    sectionCost += currentSection.getCost();
+                }
+
+                // If the second station is also in the same section, return the cost
+                if (currentSection.getPoint1().getName().equals(station2_name) || currentSection.getPoint2().getName().equals(station2_name)) {
+                    station2Exists = true;
+                    return sectionCost;
+                }
+            } else if (foundFirstStation) {
+                // Keep adding the cost until we find the second station
+                sectionCost += currentSection.getCost();
+                if (currentSection.getPoint1().getName().equals(station2_name) || currentSection.getPoint2().getName().equals(station2_name)) {
+                    station2Exists = true;
                     return sectionCost;
                 }
             }
 
-            if (foundFirstStation && currentSection.getPoint2().getName().equals(station2_name)) {
-                sectionCost += currentSection.getCost();
-                return sectionCost;
+            // Check if the current section contains station2_name
+            if (currentSection.getPoint1().getName().equals(station2_name) || currentSection.getPoint2().getName().equals(station2_name)) {
+                station2Exists = true;
             }
         }
 
+        // Check if both stations exist
+        if (!station1Exists || !station2Exists) {
+            System.out.println("Una o ambas estaciones no existen.");
+            return -1;
+        }
+
+        // If we reach here, either the stations are not in the same line or in the correct order
         return sectionCost;
     }
 
@@ -178,17 +221,32 @@ public class Line implements UseLine {
      * @return Line
      */
     @Override
-    public Line line_add_section(Section section) {
+    public void line_add_section(Section section) {
         List<Section> currentSections = getSections();
 
-        if (currentSections.contains(section)) {
-            return this;
+        // Verificar si la lista está vacía y agregar la sección directamente
+        if (currentSections == null || currentSections.isEmpty()) {
+            currentSections = new ArrayList<>();
+            currentSections.add(section);
+            setSections(currentSections);
+            return;
         }
-        currentSections.add(section);
 
-        return new Line(getId(), getNombre(), getRail_type(), currentSections);
+        // Verificar si la sección ya existe comparando estaciones
+        boolean sectionExists = false;
+        for (Section existingSection : currentSections) {
+            if ((existingSection.getPoint1().equals(section.getPoint1()) && existingSection.getPoint2().equals(section.getPoint2())) ||
+                    (existingSection.getPoint1().equals(section.getPoint2()) && existingSection.getPoint2().equals(section.getPoint1()))) {
+                sectionExists = true;
+                break;
+            }
+        }
+
+        if (!sectionExists) {
+            currentSections.add(section);
+            setSections(currentSections);
+        }
     }
-
 
     /**
      * Nombre isline
@@ -277,5 +335,6 @@ public class Line implements UseLine {
 
         return sb.toString();
     }
+
 
 }

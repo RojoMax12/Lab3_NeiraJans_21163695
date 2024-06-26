@@ -1,41 +1,113 @@
-Linea0
-STATION 1 EstacionA T 10
-STATION 2 EstacionB R 15
-STATION 3 EstacionC M 12
-STATION 4 EstacionD C 8
-STATION 5 EstacionE R 10
-SECTION EstacionA EstacionB 20.5f 30.0f
-SECTION EstacionB EstacionC 20.5f 30.0f
-SECTION EstacionC EstacionD 20.5f 30.0f
-SECTION EstacionD EstacionE 20.5f 30.0f
-SECTION EstacionE EstacionA 20.5f 30.0f
-LINE 0 Linea0 F-200
+Linea6
+STATION 32 Cerrillos T 120
+STATION 33 LoValledor R 120
+STATION 34 Presidenta R 120
+STATION 35 Franklin C 120
+STATION 36 BioBio R 10 120
+STATION 37 Nuble C 120
+STATION 38 EstadioNacional R 120
+STATION 39 Nunoa R 120
+STATION 40 InesdeSuarez R 120
+STATION 41 LosLeones T 120
+SECTION Cerrillos LoValledor 1.5f 500
+SECTION LoValledor Presidenta 1.2f 400
+SECTION Presidenta Franklin 1.0f 350
+SECTION Franklin BioBio 1.1f 375
+SECTION BioBio Nuble 1.8f 600
+SECTION Nuble EstadioNacional 2.0f 700
+SECTION EstadioNacional Nunoa 1.7f 550
+SECTION Nunoa InesdeSuarez 1.3f 450
+SECTION InesdeSuarez LosLeones 1.6f 520
+LINE 6 Linea6 Standard
 
-Linea1
-STATION 6 EstacionG T 10
-STATION 7 EstacionH R 15
-STATION 8 EstacionI M 12
-STATION 9 EstacionJ C 8
-STATION 10 EstacionK R 10
-STATION 11 EstacionL T 15
-SECTION EstacionG EstacionH 20.5f 30.0f
-SECTION EstacionH EstacionI 20.5f 30.0f
-SECTION EstacionJ EstacionK 20.5f 30.0f
-SECTION EstacionK EstacionL 20.5f 30.0f
-LINE 1 Linea1 F-300
+Linea7
+STATION 42 UniversidadDeChile T 120
+STATION 43 LosHeroes R 120
+STATION 44 SantaAna R 120
+STATION 45 Cumming C 120
+STATION 46 QuintaNormal R 120
+STATION 47 Ecuador C 120
+STATION 48 SanAlbertoHurtado R 120
+STATION 49 UniversidadDeSantiago R 120
+STATION 50 EstacionCentral R 120
+STATION 51 SanAlbertoHurtado T 120
+SECTION UniversidadDeChile LosHeroes 1.2f 400
+SECTION LosHeroes SantaAna 0.9f 300
+SECTION SantaAna Cumming 1.0f 350
+SECTION Cumming QuintaNormal 1.3f 450
+SECTION QuintaNormal Ecuador 1.5f 500
+SECTION Ecuador SanAlbertoHurtado 1.2f 400
+SECTION SanAlbertoHurtado UniversidadDeSantiago 1.0f 350
+SECTION UniversidadDeSantiago EstacionCentral 1.4f 480
+SECTION EstacionCentral SanAlbertoHurtado 1.1f 375
+LINE 7 Linea7 Standard
 
-Linea2
-STATION 12 EstacionM T 10
-STATION 13 EstacionN R 15
-STATION 14 EstacionO M 12
-STATION 15 EstacionP C 8
-STATION 16 EstacionQ R 10
-SECTION EstacionM EstacionN 20.5f 30.0f
-SECTION EstacionN EstacionO 20.5f 30.0f
-SECTION EstacionO EstacionP 20.5f 30.0f
-SECTION EstacionP EstacionQ 20.5f 30.0f
-LINE 2 Linea2 F-300
+Linea8
+STATION 52 Tobalaba T 120
+STATION 53 LosLeones R 120
+STATION 54 PedrodeValdivia R 120
+STATION 55 PioXII C 120
+STATION 56 CalleDieciocho R 120
+STATION 57 SantaRosa C 120
+STATION 58 LoOvalle R 120
+STATION 59 LaCisterna R 120
+STATION 60 ProtectoraDeLaInfancia R 120
+STATION 61 PedroAguirreCerda T 120
+SECTION Tobalaba LosLeones 1.0f 350
+SECTION LosLeones PedrodeValdivia 0.8f 270
+SECTION PedrodeValdivia PioXII 1.2f 400
+SECTION PioXII CalleDieciocho 1.5f 500
+SECTION CalleDieciocho SantaRosa 1.1f 375
+SECTION SantaRosa LoOvalle 1.3f 450
+SECTION LoOvalle LaCisterna 1.2f 400
+SECTION LaCisterna ProtectoraDeLaInfancia 1.0f 350
+SECTION ProtectoraDeLaInfancia PedroAguirreCerda 1.5f 500
+LINE 8 Linea8 Standard
 
-SUBWAY 1 MetroSantiago
+
+Linea9
+STATION 62 LaCisterna T 120
+STATION 63 SantaRosa R 120
+STATION 64 CarlosValdovinos R 120
+STATION 65 Franklin C 120
+STATION 66 Baquedano R 120
+STATION 67 ParqueBustamante C 120
+STATION 68 Salvador R 120
+STATION 69 InesdeSuarez R 120
+STATION 70 Tobalaba R 120
+STATION 71 SantaIsabel T 120
+SECTION LaCisterna SantaRosa 1.2f 400
+SECTION SantaRosa CarlosValdovinos 1.0f 350
+SECTION CarlosValdovinos Franklin 1.2f 400
+SECTION Franklin Baquedano 1.5f 500
+SECTION Baquedano ParqueBustamante 0.8f 270
+SECTION ParqueBustamante Salvador 1.2f 400
+SECTION Salvador InesdeSuarez 1.0f 350
+SECTION InesdeSuarez Tobalaba 1.3f 450
+SECTION Tobalaba SantaIsabel 1.0f 350
+LINE 9 Linea9 Standard
+
+Linea10
+STATION 72 Tobalaba T 120
+STATION 73 FranciscoBilbao R 120
+STATION 74 CristobalColon R 120
+STATION 75 LosPresidentes C 120
+STATION 76 PlazaEgaña R 120
+STATION 77 Ñuble C 120
+STATION 78 EstadioNacional R 120
+STATION 79 Pajaritos R 120
+STATION 80 LasTorres R 120
+STATION 81 HospitalElisaCorrea T 120
+SECTION Tobalaba FranciscoBilbao 1.2f 400
+SECTION FranciscoBilbao CristobalColon 1.0f 350
+SECTION CristobalColon LosPresidentes 1.5f 500
+SECTION LosPresidentes PlazaEgaña 1.2f 400
+SECTION PlazaEgaña Ñuble 1.3f 450
+SECTION Ñuble EstadioNacional 1.8f 600
+SECTION EstadioNacional Pajaritos 1.7f 550
+SECTION Pajaritos LasTorres 1.0f 350
+SECTION LasTorres HospitalElisaCorrea 1.5f 500
+LINE 10 Linea10 Standard
+
 
 

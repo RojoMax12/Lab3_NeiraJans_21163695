@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Calendar;
+import java.util.*;
 
 public class Subway implements UseSubway {
     private int id;
@@ -26,6 +23,7 @@ public class Subway implements UseSubway {
     /**
      * Nombre getName
      * Descripcion Método que obtiene el nombre de un subway
+     *
      * @return name
      */
     public String getName() {
@@ -35,6 +33,7 @@ public class Subway implements UseSubway {
     /**
      * Nombre getId
      * Descripcion Método que obtiene el id de un subway
+     *
      * @return id
      */
     public int getId() {
@@ -44,6 +43,7 @@ public class Subway implements UseSubway {
     /**
      * Nombre getLines
      * Descripcion Método que obtiene las lineas de un subway
+     *
      * @return lines
      */
     public List<Line> getLines() {
@@ -61,6 +61,7 @@ public class Subway implements UseSubway {
     /**
      * Nombre getTrains
      * Descripcion Método que obtiene los trenes de un subway
+     *
      * @return lines
      */
     public List<Train> getTrains() {
@@ -78,6 +79,7 @@ public class Subway implements UseSubway {
     /**
      * Nombre getDrivers
      * Descripcion Método que obtiene las conductores de un subway
+     *
      * @return drivers
      */
     public List<Driver> getDrivers() {
@@ -93,24 +95,9 @@ public class Subway implements UseSubway {
     }
 
     /**
-     * Nombre setId
-     * Descripcion Método que cambia el id de un subway
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * Nombre setName
-     * Descripcion Método que cambia el nombre de un subway
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Nombre addTrain
      * Descripcion Método que añade trenes a un Subway
+     *
      * @param trainList
      */
     @Override
@@ -138,10 +125,11 @@ public class Subway implements UseSubway {
     /**
      * Nombre addLine
      * Descripcion Método que añade lineas a un Subway
+     *
      * @param lineList
      */
     @Override
-    public void addLine(List<Line> lineList){
+    public void addLine(List<Line> lineList) {
         List<Line> NewLinelist = getLines();
         if (getLines().isEmpty()) {
             setLines(lineList);
@@ -165,10 +153,11 @@ public class Subway implements UseSubway {
     /**
      * Nombre addDriver
      * Descripcion Método que añade conductores a un Subway
+     *
      * @param driverList
      */
     @Override
-    public void addDriver(List<Driver> driverList){
+    public void addDriver(List<Driver> driverList) {
         List<Driver> newDriverList = getDrivers();
         if (getTrains().isEmpty()) {
             setDrivers(driverList);
@@ -191,29 +180,28 @@ public class Subway implements UseSubway {
 
     /**
      * Nombre toString
-     * Descripcion Método que muestra el subway completo
-     * @param subway
+     * Descripcion Método que muestra el subway complet
      * @return String
      */
     @Override
-    public String toString(Subway subway) {
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Subway" + getId() + ":" + "\n")
-                .append("  ID: ").append(subway.getId()).append("\n")
-                .append("  Name: ").append(subway.getName()).append("\n")
+                .append("  ID: ").append(getId()).append("\n")
+                .append("  Name: ").append(getName()).append("\n")
                 .append("  Lines:\n");
 
-        for (Line line : subway.getLines()) {
+        for (Line line : getLines()) {
             sb.append("    ").append(line).append("\n");
         }
 
         sb.append("  Trains:\n");
-        for (Train train : subway.getTrains()) {
+        for (Train train : getTrains()) {
             sb.append("    ").append(train).append("\n");
         }
 
         sb.append("  Drivers:\n");
-        for (Driver driver : subway.getDrivers()) {
+        for (Driver driver : getDrivers()) {
             sb.append("    ").append(driver).append("\n");
         }
 
@@ -223,11 +211,12 @@ public class Subway implements UseSubway {
     /**
      * Nombre assignTrainToLine
      * Descripcion Método que asigna un tren a una linea
+     *
      * @param train
      * @param line
      */
     @Override
-    public void assignTrainToLine(Train train, Line line){
+    public void assignTrainToLine(Train train, Line line) {
         for (int i = 0; i < getLines().size(); i++) {
             if (getLines().get(i).getId() == line.getId()) {
                 List<Train> existingTrains = getLines().get(i).getListTrain();
@@ -250,6 +239,7 @@ public class Subway implements UseSubway {
     /**
      * Nombre assignDriverToTrain
      * Descripcion Método que asigna un conductor a un tren, ademas de una un tiempo de salida, una estacion de inicio y una estacion de llegada
+     *
      * @param train
      * @param driver
      * @param departureTime
@@ -262,18 +252,10 @@ public class Subway implements UseSubway {
         List<Station> NewArrivalStation = new ArrayList<>();
         NewArrivalStation.add(arrivalStation);
         NewDepartureStation.add(departureStation);
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(departureTime); // Establecer la hora de salida actual
-        calendar.set(Calendar.YEAR, 2024);
-        calendar.set(Calendar.MONTH, Calendar.JUNE); // Los meses en Calendar son 0-indexados, Junio es 5
-        calendar.set(Calendar.DAY_OF_MONTH, 22);
-        Date newDepartureTime = calendar.getTime();
-
         for (Train t : getTrains()) {
             if (t.getId() == train.getId() && t.getTrainMaker().equals(driver.getTrainMaker())) {
                 t.getDriverList().add(driver);
-                t.setDepartureDate(newDepartureTime);
+                t.setDepartureDate(departureTime);
                 t.setDepartureStation(NewDepartureStation);
                 t.setArrivalStation(NewArrivalStation);
                 break;
@@ -281,134 +263,196 @@ public class Subway implements UseSubway {
         }
     }
 
+
+    /**
+     * Nombre whereIsTrain
+     * Descripcion Método que permite determinar dónde se encuentra un tren a partir de una hora indicada del día.
+     *
+     * @param train
+     * @param time
+     */
+    @Override
     public void whereIsTrain(Train train, Date time) {
-        Date timeini = train.getDepartureDate();
-        System.out.println("Hora de salida del tren: " + timeini);
+        Date departureTime = train.getDepartureDate();
+        System.out.println("Hora de salida del tren: " + departureTime);
 
-        if (getTrains().contains(train)) {
+        // Verificar si el tren está en la lista de trenes del subway
+        if (!getTrains().contains(train)) {
+            System.out.println("El tren no está en el subway.");
+            return;
+        }
 
-            for (int i = 0; i < getLines().size(); i++) {
-                Line line = getLines().get(i);
-                if (line.getListTrain().contains(train)) {
+        // Obtener la estación de salida del tren
+        Station departureStation = train.getDepartureStation().get(0);
+        System.out.println("Estación de salida del tren: " + departureStation.getName());
 
-                    for (int j = 0; j < line.getSections().size(); j++) {
+        Station closestStation = null; // Variable para almacenar la estación más cercana
+        Date closestTime = null; // Variable para almacenar el tiempo más cercano encontrado
+
+        for (Line line : getLines()) {
+            if (line.getListTrain().contains(train)) {
+                System.out.println("El tren está en la línea: " + line.getNombre());
+
+                // Encontrar la sección correspondiente a la estación de salida del tren
+                Section startSection = null;
+                for (Section section : line.getSections()) {
+                    if (section.getPoint1().getName().equals(departureStation.getName())) {
+                        startSection = section;
+                        break;
+                    }
+                }
+
+                if (startSection != null) {
+                    Date currentTime = new Date(departureTime.getTime());
+
+                    // Sumar el tiempo de parada en la estación de salida
+                    currentTime.setTime(currentTime.getTime() + startSection.getPoint1().getStop_time() * 1000);
+
+                    // Sumar el tiempo de parada en la estación de llegada
+                    currentTime.setTime(currentTime.getTime() + startSection.getPoint2().getStop_time() * 1000);
+
+                    // Sumar el tiempo de viaje de la sección
+                    long travelTimeMillis = (long) (startSection.getDistance() / train.getSpeed() * 3600 * 1000);
+                    currentTime.setTime(currentTime.getTime() + travelTimeMillis);
+
+                    // Iterar sobre las secciones restantes de la línea
+                    for (int j = line.getSections().indexOf(startSection) + 1; j < line.getSections().size(); j++) {
                         Section section = line.getSections().get(j);
 
-                        if (section.getPoint1().getName().equals(train.getDepartureStation().get(0).getName())) {
+                        // Sumar el tiempo de parada en la estación de salida
+                        currentTime.setTime(currentTime.getTime() + section.getPoint1().getStop_time() * 1000);
 
-                            // Sumar el tiempo de parada en la estación de salida
-                            timeini = new Date(timeini.getTime() + section.getPoint1().getStop_time() * 1000);
+                        // Sumar el tiempo de parada en la estación de llegada
+                        currentTime.setTime(currentTime.getTime() + section.getPoint2().getStop_time() * 1000);
 
-                            // Sumar el tiempo de parada en la estación de llegada
-                            timeini = new Date(timeini.getTime() + section.getPoint2().getStop_time() * 1000);
+                        // Sumar el tiempo de viaje de la sección
+                        travelTimeMillis = (long) (section.getDistance() / train.getSpeed() * 3600 * 1000);
+                        currentTime.setTime(currentTime.getTime() + travelTimeMillis);
 
-                            // Sumar el tiempo de viaje de la sección
-                            long travelTimeMillis = (long) (section.getDistance() / train.getSpeed() * 3600 * 1000);
-                            timeini = new Date(timeini.getTime() + travelTimeMillis);;
-
-                            // Guardar la última estación y la línea por las que el tren ha pasado
-                            Station lastStation = section.getPoint2();
-                            String lineName = line.getNombre();
-
-                            for (int k = j; k < line.getSections().size(); k++) {
-                                if (timeini.compareTo(time) >= 0) {
-                                    // Si timeini se ha aproximado a time, mostrar la estación y la línea y salir del bucle
-                                    System.out.println("El tren está en la línea: " + lineName + ", cerca de la estación: " + lastStation.getName());
-                                    return;
-                                }
-                                section = line.getSections().get(k);
-
-                                // Guardar la última estación y la línea por las que el tren ha pasado
-                                lastStation = section.getPoint2();
-                                lineName = line.getNombre();
-
-                                // Sumar el tiempo de parada en la estación de salida
-                                timeini = new Date(timeini.getTime() + section.getPoint1().getStop_time() * 1000);
-
-                                // Sumar el tiempo de parada en la estación de llegada
-                                timeini = new Date(timeini.getTime() + section.getPoint2().getStop_time() * 1000);
-
-                                // Sumar el tiempo de viaje de la sección
-                                travelTimeMillis = (long) (section.getDistance() / train.getSpeed() * 3600 * 1000);
-                                timeini = new Date(timeini.getTime() + travelTimeMillis);
-                            }
+                        // Verificar si el tiempo calculado supera o iguala el tiempo consultado
+                        if (currentTime.compareTo(time) >= 0) {
+                            // Si es así, actualizar la estación más cercana
+                            closestStation = section.getPoint2();
+                            closestTime = currentTime;
+                            break; // Salir del bucle, ya que hemos encontrado la estación más cercana
                         }
                     }
                 }
             }
-            // Si el bucle termina sin encontrar el tren en el tiempo especificado
-            System.out.println("El tren ya ha completado su recorrido o no se encuentra en el subway en el momento especificado.");
-        } else {
-            System.out.println("El tren no está en el subway.");
         }
 
-}
-
-    public List<Station> trainPath(Train train, Date time) {
-        Date timeini = train.getDepartureDate();
-        List<Station> estacionesFaltantesPorRecorrer = new ArrayList<>();
-        System.out.println("Hora de salida del tren: " + timeini);
-
-        if (getTrains().contains(train)) {
-            for (int i = 0; i < getLines().size(); i++) {
-                Line line = getLines().get(i);
-                if (line.getListTrain().contains(train)) {
-                    for (int j = 0; j < line.getSections().size(); j++) {
-                        Section section = line.getSections().get(j);
-                        if (section.getPoint1().getName().equals(train.getDepartureStation().get(0).getName())) {
-                            // Sumar el tiempo de parada en la estación de salida
-                            timeini = new Date(timeini.getTime() + section.getPoint1().getStop_time() * 1000);
-
-                            // Sumar el tiempo de parada en la estación de llegada
-                            timeini = new Date(timeini.getTime() + section.getPoint2().getStop_time() * 1000);
-
-                            // Sumar el tiempo de viaje de la sección
-                            long travelTimeMillis = (long) (section.getDistance() / train.getSpeed() * 3600 * 1000);
-                            timeini = new Date(timeini.getTime() + travelTimeMillis);
-
-                            // Guardar la última estación y la línea por las que el tren ha pasado
-                            Station lastStation = section.getPoint2();
-                            String lineName = line.getNombre();
-
-                            for (int k = j; k < line.getSections().size(); k++) {
-                                if (timeini.compareTo(time) >= 0) {
-                                    // Si timeini se ha aproximado a time, agregar las estaciones restantes y salir del bucle
-                                    for (int m = k; m < line.getSections().size(); m++) {
-                                        Section remainingSection = line.getSections().get(m);
-                                        estacionesFaltantesPorRecorrer.add(remainingSection.getPoint2());
-                                    }
-                                    System.out.println("El tren está en la línea: " + lineName + ", cerca de la estación: " + lastStation.getName());
-                                    return estacionesFaltantesPorRecorrer;
-                                }
-                                section = line.getSections().get(k);
-                                System.out.println("Revisando siguiente sección: " + section);
-
-                                // Guardar la última estación y la línea por las que el tren ha pasado
-                                lastStation = section.getPoint2();
-                                lineName = line.getNombre();
-
-                                // Sumar el tiempo de parada en la estación de salida
-                                timeini = new Date(timeini.getTime() + section.getPoint1().getStop_time() * 1000);
-                                System.out.println("Hora después de la parada en la estación de salida: " + timeini);
-
-                                // Sumar el tiempo de parada en la estación de llegada
-                                timeini = new Date(timeini.getTime() + section.getPoint2().getStop_time() * 1000);
-                                System.out.println("Hora después de la parada en la estación de llegada: " + timeini);
-
-                                // Sumar el tiempo de viaje de la sección
-                                travelTimeMillis = (long) (section.getDistance() / train.getSpeed() * 3600 * 1000);
-                                timeini = new Date(timeini.getTime() + travelTimeMillis);
-                                System.out.println("Hora después del tiempo de viaje: " + timeini);
-                            }
-                        }
-                    }
-                }
-            }
-            // Si el bucle termina sin encontrar el tren en el tiempo especificado
-            System.out.println("El tren ya ha completado su recorrido o no se encuentra en el subway en el momento especificado.");
+        // Mostrar la estación más cercana encontrada
+        if (time.before(departureTime)) {
+            System.out.println("El tren aún no ha salido. Está programado para salir a las " + departureTime);
+        } else if (time.equals(departureTime)) {
+            System.out.println("El tren está apunto de salir o está en la estación de salida.");
+        } else if (closestStation != null && closestTime != null) {
+            System.out.println("El tren está cerca de la estación: " + closestStation.getName());
         } else {
-            System.out.println("El tren no está en el subway.");
+            // Si no se encontró ninguna estación cercana
+            System.out.println("El tren ya ha completado su recorrido o no se encuentra en el subway en el momento especificado.");
         }
-        return estacionesFaltantesPorRecorrer;
     }
+
+
+    /**
+     * Nombre trainPath
+     * Descripcion Método que permite ir armando el recorrido del tren a partir de una hora especificada y que retorna la lista de estaciones futuras por recorrer.
+     *
+     * @param train
+     * @param time
+     * @return
+     */
+    @Override
+    public List<Station> trainPath(Train train, Date time) {
+            List<Station> remainingPath = new ArrayList<>();
+            Date departureTime = train.getDepartureDate();
+            System.out.println("Hora de salida del tren: " + departureTime);
+
+            // Verificar si el tren está en la lista de trenes del subway
+            if (!getTrains().contains(train)) {
+                System.out.println("El tren no está en el subway.");
+                return remainingPath;
+            }
+
+            // Obtener la estación de salida del tren
+            Station departureStation = train.getDepartureStation().get(0);
+            System.out.println("Estación de salida del tren: " + departureStation.getName());
+
+            Station closestStation = null;
+            Date closestTime = null;
+
+            for (Line line : getLines()) {
+                if (line.getListTrain().contains(train)) {
+                    System.out.println("El tren está en la línea: " + line.getNombre());
+
+                    Section startSection = null;
+                    for (Section section : line.getSections()) {
+                        if (section.getPoint1().getName().equals(departureStation.getName())) {
+                            startSection = section;
+                            break;
+                        }
+                    }
+
+                    if (startSection != null) {
+                        Date currentTime = new Date(departureTime.getTime());
+
+                        // Sumar el tiempo de parada en la estación de salida
+                        currentTime.setTime(currentTime.getTime() + startSection.getPoint1().getStop_time() * 1000);
+
+                        // Sumar el tiempo de viaje de la sección
+                        long travelTimeMillis = (long) (startSection.getDistance() / train.getSpeed() * 3600 * 1000);
+                        currentTime.setTime(currentTime.getTime() + travelTimeMillis);
+
+                        // Sumar el tiempo de parada en la estación de llegada
+                        currentTime.setTime(currentTime.getTime() + startSection.getPoint2().getStop_time() * 1000);
+
+                        // Iterar sobre las secciones restantes de la línea
+                        boolean pastConsultedTime = false;
+                        for (int j = line.getSections().indexOf(startSection); j < line.getSections().size(); j++) {
+                            Section section = line.getSections().get(j);
+
+                            // Verificar si el tiempo calculado supera o iguala el tiempo consultado
+                            if (currentTime.compareTo(time) >= 0) {
+                                if (!pastConsultedTime) {
+                                    pastConsultedTime = true;
+                                    closestStation = section.getPoint1();
+                                    closestTime = currentTime;
+                                }
+                                // Agregar todas las estaciones restantes a remainingPath
+                                if (!remainingPath.contains(section.getPoint1())) {
+                                    remainingPath.add(section.getPoint1());
+                                }
+                                remainingPath.add(section.getPoint2());
+                            }
+
+                            // Sumar el tiempo de parada en la estación de salida
+                            currentTime.setTime(currentTime.getTime() + section.getPoint1().getStop_time() * 1000);
+
+                            // Sumar el tiempo de viaje de la sección
+                            travelTimeMillis = (long) (section.getDistance() / train.getSpeed() * 3600 * 1000);
+                            currentTime.setTime(currentTime.getTime() + travelTimeMillis);
+
+                            // Sumar el tiempo de parada en la estación de llegada
+                            currentTime.setTime(currentTime.getTime() + section.getPoint2().getStop_time() * 1000);
+                        }
+                    }
+                }
+            }
+
+            // Mostrar la estación más cercana encontrada
+            if (time.before(departureTime)) {
+                System.out.println("El tren aún no ha salido. Está programado para salir a las " + departureTime);
+            } else if (time.equals(departureTime)) {
+                System.out.println("El tren está a punto de salir o está en la estación de salida.");
+            } else if (closestStation != null && closestTime != null) {
+                System.out.println("El tren está cerca de la estación: " + closestStation.getName());
+            } else {
+                System.out.println("El tren ya ha completado su recorrido o no se encuentra en el subway en el momento especificado.");
+            }
+
+            return remainingPath;
+        }
+
 }
+

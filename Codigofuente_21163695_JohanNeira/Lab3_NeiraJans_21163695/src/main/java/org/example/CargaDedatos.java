@@ -56,6 +56,7 @@ public class CargaDedatos implements UseCargaDedatos {
      * @return Subway
      */
 
+    @Override
     public Subway loadFromFileSubway(Scanner scanner, Subway subway) {
         System.out.print("Ingrese el nombre del archivo (incluyendo la extensión .txt): ");
         String fileName = scanner.next();
@@ -63,7 +64,7 @@ public class CargaDedatos implements UseCargaDedatos {
         File file = new File(fileName);
         if (!file.exists()) {
             System.out.println("Archivo no encontrado: " + fileName);
-            return null;
+            return subway;
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -73,6 +74,7 @@ public class CargaDedatos implements UseCargaDedatos {
             List<Section> sections = new ArrayList<>();
             List<Line> lineList = new ArrayList<>();
             Map<String, Station> stationMap = new HashMap<>();
+            int currentLineId = -1;
 
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\\s+");
@@ -118,13 +120,23 @@ public class CargaDedatos implements UseCargaDedatos {
 
                         case "LINE":
                             if (parts.length >= 4) {
+                                List<Section> auxsectionList = new ArrayList<>();
                                 int lineId = Integer.parseInt(parts[1]);
                                 String lineName = parts[2];
                                 String railType = parts[3];
 
-                                Line lineObject = new Line(lineId, lineName, railType, new ArrayList<>());
-                                for (Section section : sections) {
-                                    lineObject = lineObject.line_add_section(section);
+                                if (currentLineId != lineId) {
+                                    if (currentLineId != -1) {
+                                        // Agregar la línea actual a subway solo si no está vacía
+                                        subway.addLine(lineList);
+                                        lineList.clear();
+                                    }
+                                    currentLineId = lineId;
+                                }
+
+                                Line lineObject = new Line(lineId, lineName, railType, auxsectionList);
+                                for (Section section : sections){
+                                    lineObject.line_add_section(section);
                                 }
                                 lineList.add(lineObject);
                                 sections.clear();  // Limpiar secciones después de agregarlas a una línea
@@ -133,34 +145,25 @@ public class CargaDedatos implements UseCargaDedatos {
                             }
                             break;
 
-                        case "SUBWAY":
-                            if (parts.length >= 3) {
-                                if (subway.getId() == 9999 && subway.getName().equals("Nada")) {
-                                    int subwayId = Integer.parseInt(parts[1]);
-                                    subway.setId(subwayId);
-                                    subway.setName(parts[2]);
-                                    subway.addLine(lineList);
-                                    System.out.println("Subway creado");
-                                } else {
-                                    subway.addLine(lineList);
-                                    return subway;
-                                }
-                            } else {
-                                System.out.println("Formato incorrecto para SUBWAY: " + line);
-                            }
-                            break;
-
                         default:
                             System.out.println("Identificador desconocido: " + identifier);
                     }
                 }
             }
+
+            // Agregar la última línea al subway, si no está vacía
+            if (!lineList.isEmpty()) {
+                subway.addLine(lineList);
+            }
+
+            System.out.println("Líneas agregadas correctamente");
+
         } catch (IOException | IllegalArgumentException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
+
         return subway;
     }
-
 
 
     /**
@@ -179,7 +182,7 @@ public class CargaDedatos implements UseCargaDedatos {
         File file = new File(fileName);
         if (!file.exists()) {
             System.out.println("Archivo no encontrado: " + fileName);
-            return null;
+            return subway;
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -187,7 +190,7 @@ public class CargaDedatos implements UseCargaDedatos {
 
             List<PassengerCar> passengerCarList = new ArrayList<>();
             List<Train> trainList = new ArrayList<>();
-            List<Train> trainListSubway = new ArrayList<>();
+            List<Train> trainSubway = new ArrayList<>();
 
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\\s+");
@@ -207,7 +210,6 @@ public class CargaDedatos implements UseCargaDedatos {
                                 PassengerCar passengerCar = new PassengerCar(id, capacity, model, trainmaker, carType);
                                 passengerCarList.add(passengerCar);
                                 cargaDedatos.passengerCarList.add(passengerCar);
-
                             } else {
                                 System.out.println("Formato incorrecto para PASSENGERCAR: " + line);
                             }
@@ -220,7 +222,7 @@ public class CargaDedatos implements UseCargaDedatos {
                                 int speed = Integer.parseInt(parts[3]);
                                 Train train = new Train(id, trainmaker, speed, new ArrayList<>(passengerCarList));
                                 trainList.add(train);
-                                trainListSubway.add(train);
+                                trainSubway.add(train);
                                 passengerCarList.clear();
                             } else {
                                 System.out.println("Formato incorrecto para TRAIN: " + line);
@@ -229,10 +231,15 @@ public class CargaDedatos implements UseCargaDedatos {
 
                         case "LINE":
                             if (parts.length >= 2) {
-                                int lineId = Integer.parseInt(parts[1]);
+                                int lineId = Integer.parseInt(parts[1]) - 1;
                                 if (lineId >= 0 && lineId < subway.getLines().size()) {
-                                    subway.assignTrainToLine(trainList.get(0), subway.getLines().get(lineId));
-                                    trainList.clear();
+                                    // Asegurarse de que haya al menos un tren para asignar
+                                    if (!trainList.isEmpty()) {
+                                        subway.assignTrainToLine(trainList.get(0), subway.getLines().get(lineId));
+                                        trainList.clear();  // Limpiar lista de trenes asignados
+                                    } else {
+                                        System.out.println("No hay trenes para asignar a la línea " + lineId);
+                                    }
                                 } else {
                                     System.out.println("Línea no encontrada: " + lineId);
                                 }
@@ -247,13 +254,17 @@ public class CargaDedatos implements UseCargaDedatos {
                 }
             }
 
-            if (!trainListSubway.isEmpty()) {
-                subway.addTrain(trainListSubway);
-                System.out.println("Trenes asignados a la Red de metro y a las Lineas");
+            // Agregar todos los trenes restantes al subway
+            if (!trainSubway.isEmpty()) {
+                subway.addTrain(trainSubway);
+                trainList.clear(); // Limpiar la lista de trenes
             }
+
         } catch (IOException | IllegalArgumentException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
+
+        System.out.println("Trenes Asignados correctamente a las lineas");
         return subway;
     }
 
@@ -273,7 +284,7 @@ public class CargaDedatos implements UseCargaDedatos {
         File file = new File(fileName);
         if (!file.exists()) {
             System.out.println("Archivo no encontrado: " + fileName);
-            return null;
+            return subway;
         }
 
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
@@ -313,7 +324,6 @@ public class CargaDedatos implements UseCargaDedatos {
                                 int stoptime = Integer.parseInt(parts[4]);
                                 Station station = new Station(id, name, type, stoptime);
                                 stationList.add(station);
-
                             } else {
                                 System.out.println("Formato incorrecto para STATION: " + line);
                             }
@@ -321,7 +331,7 @@ public class CargaDedatos implements UseCargaDedatos {
 
                         case "TRAIN":
                             if (parts.length >= 5) {
-                                int id = Integer.parseInt(parts[1]);
+                                int id = Integer.parseInt(parts[1]) - 1;
                                 Date date = timeFormatter.parse(parts[2]);
                                 String startStationName = parts[3];
                                 String endStationName = parts[4];
@@ -344,8 +354,8 @@ public class CargaDedatos implements UseCargaDedatos {
                                             startStation,
                                             endStation
                                     );
-                                    driverList.clear();
-                                    stationList.clear();
+                                    driverList.clear(); // Limpiar lista de conductores asignados
+                                    stationList.clear(); // Limpiar lista de estaciones
                                 } else {
                                     System.out.println("Error al asignar el tren: estaciones o conductores no encontrados.");
                                 }
@@ -368,6 +378,7 @@ public class CargaDedatos implements UseCargaDedatos {
         } catch (IOException | ParseException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
+
         return subway;
     }
 

@@ -30,14 +30,6 @@ public class Station {
         return stop_time;
     }
 
-    /**
-     * Nombre getId
-     * Descripcion Método que obtiene el Id de una Station
-     * @return id
-     */
-    public int getId() {
-        return id;
-    }
 
     /**
      * Nombre getType
@@ -66,7 +58,7 @@ public class Station {
         return "[" + id +
                 "," + name  +
                 "," + type +
-                "," + "TiempoDeParada: " + stop_time +
+                "," + stop_time +
                 ']';
     }
 }

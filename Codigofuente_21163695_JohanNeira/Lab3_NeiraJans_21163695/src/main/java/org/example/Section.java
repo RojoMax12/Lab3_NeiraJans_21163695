@@ -64,7 +64,7 @@ public class Section {
      */
     @Override
     public String toString() {
-        return "[" + point1.toString()+ "," + point2.toString() +"," + "Distancia entre estaicones: " + distance + "," + cost +
+        return "[" + point1.toString()+ "," + point2.toString() +","  + distance + "," + cost +
                 ']';
     }
 }

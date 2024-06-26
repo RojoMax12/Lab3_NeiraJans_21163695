@@ -1,13 +1,16 @@
 package org.example;
 
+import java.util.List;
+
 public interface UseMenu {
 
     /**
      * Nombre showMenu
      * Descripcion  Método que muestra el Menu pricipal
      * @param subway
+     * @param Passengercarlit
      */
-    public void showMenu(Subway subway);
+    public void showMenu(Subway subway, List<PassengerCar> Passengercarlit);
 
     /**
      * Nombre option1
@@ -28,8 +31,9 @@ public interface UseMenu {
      * Descripcion  Método que genera un menu y ademas muestra de la opcion3 del Menu principal
      * @param subway
      * @param cargaDedatos
+     * @param passengerCarlit
      */
-    public void option3(Subway subway, CargaDedatos cargaDedatos);
+    public void option3(Subway subway, CargaDedatos cargaDedatos, List<PassengerCar> passengerCarlit);
 
     /**
      * Nombre displayOptionsInicio
