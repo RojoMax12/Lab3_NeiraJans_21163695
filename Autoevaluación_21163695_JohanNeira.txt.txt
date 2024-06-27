@@ -32,8 +32,8 @@ TDA subway-addDriver / addDriver / 1
 TDA subway-toString / toString / 1
 TDA subway-assignTrainToLine / assignTrainToLine / 1
 TDA subway-assignDriverToTrain / assignDriverToTrain / 1
-TDA subway-whereIsTrain / whereIsTrain/ 0
-TDA subway-trainPath/ trainPath / 0
+TDA subway-whereIsTrain / whereIsTrain/ 1
+TDA subway-trainPath/ trainPath / 1
 
 Requerimientos no Funcionales
 
