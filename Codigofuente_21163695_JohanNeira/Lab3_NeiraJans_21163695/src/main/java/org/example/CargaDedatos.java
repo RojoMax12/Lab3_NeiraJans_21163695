@@ -15,6 +15,7 @@ public class CargaDedatos implements UseCargaDedatos {
     /**
      * Nombre CargaDedatos
      * Descripcion Metodo que construye una carga de datos
+     *
      * @param subway
      */
     public CargaDedatos(Subway subway) {
@@ -24,6 +25,7 @@ public class CargaDedatos implements UseCargaDedatos {
     /**
      * Nombre getSubway
      * Descripcion Metodo que obtiene un subway
+     *
      * @return Subway
      */
     public Subway getSubway() {
@@ -33,6 +35,7 @@ public class CargaDedatos implements UseCargaDedatos {
     /**
      * Nombre setSubway
      * Descripcion Metodo que modifica el Subway
+     *
      * @param subway
      */
     public void setSubway(Subway subway) {
@@ -42,6 +45,7 @@ public class CargaDedatos implements UseCargaDedatos {
     /**
      * Nombre getPassengerCarList
      * Descripcion Metodo que obtiene la lista de PassengerCarList
+     *
      * @return passengerCarList
      */
     public List<PassengerCar> getPassengerCarList() {
@@ -49,11 +53,11 @@ public class CargaDedatos implements UseCargaDedatos {
     }
 
     /**
-     * @Nombre loadFromFileTrain
-     * @Descripcion Metodo que carga las lineas a la Red de metro y el la Red de Metro
      * @param scanner
      * @param subway
      * @return Subway
+     * @Nombre loadFromFileTrain
+     * @Descripcion Metodo que carga las lineas a la Red de metro y el la Red de Metro
      */
 
     @Override
@@ -135,7 +139,7 @@ public class CargaDedatos implements UseCargaDedatos {
                                 }
 
                                 Line lineObject = new Line(lineId, lineName, railType, auxsectionList);
-                                for (Section section : sections){
+                                for (Section section : sections) {
                                     lineObject.line_add_section(section);
                                 }
                                 lineList.add(lineObject);
@@ -167,12 +171,12 @@ public class CargaDedatos implements UseCargaDedatos {
 
 
     /**
-     * @Nombre loadFromFileTrain
-     * @Descripcion Metodo que carga los trenes a la Red de metro y a la lineas correspondientes
      * @param scanner
      * @param subway
      * @param cargaDedatos
      * @return Subway
+     * @Nombre loadFromFileTrain
+     * @Descripcion Metodo que carga los trenes a la Red de metro y a la lineas correspondientes
      */
     @Override
     public Subway loadFromFileTrain(Scanner scanner, Subway subway, CargaDedatos cargaDedatos) {
@@ -270,11 +274,11 @@ public class CargaDedatos implements UseCargaDedatos {
 
 
     /**
-     * @Nombre loadFromFileDriver
-     * @Descripcion Metodo que carga los conductores a la Red de metro y los trenes correspondientes
      * @param scanner
      * @param subway
      * @return Subway
+     * @Nombre loadFromFileDriver
+     * @Descripcion Metodo que carga los conductores a la Red de metro y los trenes correspondientes
      */
     @Override
     public Subway loadFromFileDriver(Scanner scanner, Subway subway) {
@@ -384,11 +388,11 @@ public class CargaDedatos implements UseCargaDedatos {
 
 
     /**
-     * @Nombre loadFromFileCombination
-     * @Descripcion Metodo que carga las combinaciones a la Red de metro
      * @param scanner
      * @param subway
      * @return Subway
+     * @Nombre loadFromFileCombination
+     * @Descripcion Metodo que carga las combinaciones a la Red de metro
      */
     @Override
     public Subway loadFromFileCombination(Scanner scanner, Subway subway) {
@@ -406,7 +410,6 @@ public class CargaDedatos implements UseCargaDedatos {
 
             List<Station> stations = new ArrayList<>();
             List<Section> sections = new ArrayList<>();
-            List<Line> lineList = new ArrayList<>();
             Map<String, Station> stationMap = new HashMap<>();
 
             while ((line = br.readLine()) != null) {
@@ -425,7 +428,7 @@ public class CargaDedatos implements UseCargaDedatos {
 
                                 Station station = new Station(id, name, type, stopTime);
                                 stations.add(station);
-                                stationMap.put(name, station); // Guardar en minúsculas
+                                stationMap.put(name.toLowerCase(), station); // Guardar en minúsculas
                             } else {
                                 System.out.println("Formato incorrecto para STATION: " + line);
                             }
@@ -438,8 +441,8 @@ public class CargaDedatos implements UseCargaDedatos {
                                 float distance = Float.parseFloat(parts[3]);
                                 float cost = Float.parseFloat(parts[4]);
 
-                                Station point1 = stationMap.get(station1Name); // Buscar en minúsculas
-                                Station point2 = stationMap.get(station2Name); // Buscar en minúsculas
+                                Station point1 = stationMap.get(station1Name.toLowerCase()); // Buscar en minúsculas
+                                Station point2 = stationMap.get(station2Name.toLowerCase()); // Buscar en minúsculas
                                 if (point1 != null && point2 != null) {
                                     Section section = new Section(point1, point2, distance, cost);
                                     sections.add(section);
@@ -452,14 +455,15 @@ public class CargaDedatos implements UseCargaDedatos {
                             break;
 
                         case "LINE":
-                            if (parts.length >= 4) {
+                            if (parts.length >= 3) {
                                 int lineId = Integer.parseInt(parts[1]);
-                                String lineName = parts[2];
-                                String railType = parts[3];
-
-                                Line lineObject = new Line(lineId, lineName, railType, new ArrayList<>(sections));
-                                lineList.add(lineObject);
-                                sections.clear();  // Limpiar secciones después de agregarlas a una línea
+                                int positionAddCombination = Integer.parseInt(parts[2]);
+                                if (lineId > 0 && lineId <= subway.getLines().size()) {
+                                    subway.getLines().get(lineId - 1).getSections().add(positionAddCombination, sections.get(0));
+                                    sections.clear();
+                                } else {
+                                    System.out.println("ID de línea fuera de rango: " + lineId);
+                                }
                             } else {
                                 System.out.println("Formato incorrecto para LINE: " + line);
                             }
@@ -470,17 +474,12 @@ public class CargaDedatos implements UseCargaDedatos {
                     }
                 }
             }
-            if (!lineList.isEmpty()) {
-                subway.addLine(lineList);
-                System.out.println("Combinaciones añadidas a la Red de metro");
-                return subway;
-            }
+            System.out.println("Combinaciones añadidas a la Red de metro");
 
         } catch (IOException | IllegalArgumentException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
         }
         return subway;
     }
-
-
 }
+

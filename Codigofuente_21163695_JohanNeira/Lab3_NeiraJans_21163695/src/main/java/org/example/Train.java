@@ -148,17 +148,28 @@ public class Train implements UseTrain {
      */
     @Override
     public void addCar(PassengerCar passengerCar, int position) {
-
+        // Obtén la lista actual de carros
         List<PassengerCar> newCarList = new ArrayList<>(getCarList());
 
+        // Verifica que la posición sea válida
         if (position < 0 || position > newCarList.size()) {
             throw new IndexOutOfBoundsException("La posición está fuera del rango válido.");
         }
 
-        newCarList.add(position, passengerCar);
-        setCarList(new ArrayList<>(newCarList));
+        // Verifica si el ID del nuevo carro ya existe en la lista
+        for (PassengerCar car : newCarList) {
+            if (car.getId() == passengerCar.getId()) {
+                throw new IllegalArgumentException("El ID del carro ya existe en la lista.");
+            }
+        }
 
+        // Añade el nuevo carro en la posición especificada
+        newCarList.add(position, passengerCar);
+
+        // Actualiza la lista de carros
+        setCarList(new ArrayList<>(newCarList));
     }
+
 
     /**
      * Nombre removeCar

@@ -11,7 +11,6 @@ STATION 40 InesdeSuarez R 120
 STATION 41 LosLeones T 120
 SECTION Cerrillos LoValledor 1.5f 500
 SECTION LoValledor Presidenta 1.2f 400
-SECTION Presidenta Franklin 1.0f 350
 SECTION Franklin BioBio 1.1f 375
 SECTION BioBio Nuble 1.8f 600
 SECTION Nuble EstadioNacional 2.0f 700
@@ -33,9 +32,7 @@ STATION 50 EstacionCentral R 120
 STATION 51 SanAlbertoHurtado T 120
 SECTION UniversidadDeChile LosHeroes 1.2f 400
 SECTION LosHeroes SantaAna 0.9f 300
-SECTION SantaAna Cumming 1.0f 350
 SECTION Cumming QuintaNormal 1.3f 450
-SECTION QuintaNormal Ecuador 1.5f 500
 SECTION Ecuador SanAlbertoHurtado 1.2f 400
 SECTION SanAlbertoHurtado UniversidadDeSantiago 1.0f 350
 SECTION UniversidadDeSantiago EstacionCentral 1.4f 480
@@ -55,9 +52,7 @@ STATION 60 ProtectoraDeLaInfancia R 120
 STATION 61 PedroAguirreCerda T 120
 SECTION Tobalaba LosLeones 1.0f 350
 SECTION LosLeones PedrodeValdivia 0.8f 270
-SECTION PedrodeValdivia PioXII 1.2f 400
 SECTION PioXII CalleDieciocho 1.5f 500
-SECTION CalleDieciocho SantaRosa 1.1f 375
 SECTION SantaRosa LoOvalle 1.3f 450
 SECTION LoOvalle LaCisterna 1.2f 400
 SECTION LaCisterna ProtectoraDeLaInfancia 1.0f 350
@@ -78,7 +73,6 @@ STATION 70 Tobalaba R 120
 STATION 71 SantaIsabel T 120
 SECTION LaCisterna SantaRosa 1.2f 400
 SECTION SantaRosa CarlosValdovinos 1.0f 350
-SECTION CarlosValdovinos Franklin 1.2f 400
 SECTION Franklin Baquedano 1.5f 500
 SECTION Baquedano ParqueBustamante 0.8f 270
 SECTION ParqueBustamante Salvador 1.2f 400
@@ -100,9 +94,7 @@ STATION 80 LasTorres R 120
 STATION 81 HospitalElisaCorrea T 120
 SECTION Tobalaba FranciscoBilbao 1.2f 400
 SECTION FranciscoBilbao CristobalColon 1.0f 350
-SECTION CristobalColon LosPresidentes 1.5f 500
 SECTION LosPresidentes PlazaEgaña 1.2f 400
-SECTION PlazaEgaña Ñuble 1.3f 450
 SECTION Ñuble EstadioNacional 1.8f 600
 SECTION EstadioNacional Pajaritos 1.7f 550
 SECTION Pajaritos LasTorres 1.0f 350

@@ -82,7 +82,7 @@ public class Menu implements UseMenu {
         String[] strings = input.split(",");
 
         for (String str : strings) {
-            System.out.println(str.trim()); // trim() para eliminar espacios en blanco alrededor
+            str.trim();
         }
 
         // Retornar el array de strings obtenidos
@@ -248,16 +248,58 @@ public class Menu implements UseMenu {
                     break;
 
                 case 6:
-                    System.out.print("Ingrese el ID de el tren a modificar: ");
+                    System.out.print("Ingrese el ID del tren a modificar: ");
                     int trainId6 = getUserChoice1() - 1;
-                    System.out.println("Lista de PassagerCar disponibles, elija uno: " + passengerCarList.toString());
-                    int passercaruse = getUserChoice1() - 1;
-                    System.out.print("En que posicion de los vagones del tren desea introducirlo el vagon seleccionado, tenga encuenta que empieza desde el 0 la posicion: ");
+
+                    int IdPassenger;
+                    boolean idRepetido;
+
+                    do {
+                        System.out.print("Ingrese un ID para crear un vagón: ");
+                        IdPassenger = getUserChoice1();
+
+                        // Verificar que el ID del PassengerCar no esté repetido en ningún tren
+                        idRepetido = false;
+                        for (Train train : subway.getTrains()) {
+                            for (PassengerCar car : train.getCarList()) {
+                                if (car.getId() == IdPassenger) {
+                                    idRepetido = true;
+                                    break;
+                                }
+                            }
+                            if (idRepetido) {
+                                break;
+                            }
+                        }
+
+                        if (idRepetido) {
+                            System.out.println("El ID del vagón ya está en uso. Por favor, ingrese un ID diferente.");
+                        }
+                    } while (idRepetido);
+
+                    System.out.print("Ingrese la capacidad del vagón: ");
+                    int CapacityPassenger = getUserChoice1();
+
+                    System.out.print("Ingrese el modelo del vagón y el creador: ");
+                    String[] ModelandVagon = obtenerStrings();
+
+                    System.out.print("Ingrese el tipo de vagón, considere que solo hay 2 tipos CT y TR: ");
+                    String[] type = obtenerStrings();
+
+                    System.out.print("En qué posición de los vagones del tren desea introducir el vagón seleccionado, tenga en cuenta que la posición empieza desde 0: ");
                     int position = getUserChoice1();
-                    List<PassengerCar> generallist = new ArrayList<>();
-                    generallist.addAll(passengerCarList);
-                    generallist.addAll(cargaDedatos.getPassengerCarList());
-                    subway.getTrains().get(trainId6).addCar(generallist.get(passercaruse), position);
+
+                    PassengerCar passengerCar;
+                    if (type[0].equals("CT")) {
+                        passengerCar = new PassengerCar(IdPassenger, CapacityPassenger, ModelandVagon[0], ModelandVagon[1], CarType.CT);
+                    } else if (type[0].equals("TR")) {
+                        passengerCar = new PassengerCar(IdPassenger, CapacityPassenger, ModelandVagon[0], ModelandVagon[1], CarType.TR);
+                    } else {
+                        System.out.println("Tipo de vagón no válido.");
+                        return;
+                    }
+
+                    subway.getTrains().get(trainId6).addCar(passengerCar, position);
                     System.out.println("Tren modificado");
                     break;
 

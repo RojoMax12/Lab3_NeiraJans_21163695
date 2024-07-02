@@ -42,6 +42,15 @@ public class PassengerCar {
         return cartype;
     }
 
+    /**
+     * Nombre getId
+     * Descripcion  Método que obtiene la id de un PassengerCar
+     * @return id
+     */
+    public int getId() {
+        return id;
+    }
+
 
     /**
      * Nombre toString
@@ -55,4 +64,5 @@ public class PassengerCar {
                 "," + cartype +
                 ']';
     }
+
 }

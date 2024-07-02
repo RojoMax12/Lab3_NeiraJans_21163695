@@ -1,12 +1,45 @@
-STATION 4 EstacionD C 8
-STATION 10 EstacionJ C 8
-SECTION EstacionD EstacionJ 20.5f 30.0f
-SECTION EstacionJ EstacionD 20.5f 30.0f
-LINE 11 Linea0A F-200
+STATION 34 Presidenta R 120
+STATION 35 Franklin C 120
+SECTION Presidenta Franklin 1.0f 350
+LINE 6 2
 
-STATION 16 EstacionP C 8
-STATION 10 EstacionJ C 8
-SECTION EstacionP EstacionJ 20.5f 30.0f
-SECTION EstacionJ EstacionP 20.5f 30.0f
-LINE 12 Linea1A F-150
+STATION 44 SantaAna R 120
+STATION 45 Cumming C 120
+SECTION SantaAna Cumming 1.0f 350
+LINE 7 2
 
+
+STATION 46 QuintaNormal R 120
+STATION 47 Ecuador C 120
+SECTION QuintaNormal Ecuador 1.5f 500
+LINE 7 4
+
+
+STATION 54 PedrodeValdivia R 120
+STATION 55 PioXII C 120
+SECTION PedrodeValdivia PioXII 1.2f 400
+LINE 8 2
+
+
+STATION 56 CalleDieciocho R 120
+STATION 57 SantaRosa C 120
+SECTION CalleDieciocho SantaRosa 1.1f 375
+LINE 8 4
+
+
+STATION 64 CarlosValdovinos R 120
+STATION 65 Franklin C 120
+SECTION CarlosValdovinos Franklin 1.2f 400
+LINE 9 2
+
+
+STATION 74 CristobalColon R 120
+STATION 75 LosPresidentes C 120
+SECTION CristobalColon LosPresidentes 1.5f 500
+LINE 10 2
+
+
+STATION 76 PlazaEgaña R 120
+STATION 77 Ñuble C 120
+SECTION PlazaEgaña Ñuble 1.3f 450
+LINE 10 4
