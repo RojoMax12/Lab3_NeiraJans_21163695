@@ -218,7 +218,6 @@ public class Line implements UseLine {
      * Nombre line_add_section
      * Descripcion Método que permite añadir tramos a una línea.
      * @param section
-     * @return Line
      */
     @Override
     public void line_add_section(Section section) {

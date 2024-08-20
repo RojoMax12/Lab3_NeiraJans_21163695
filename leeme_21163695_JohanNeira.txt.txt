@@ -17,9 +17,10 @@ Linux/Unix:
 Windows:
 gradlew.bat run
 
-4)Utilize el programa como le mas le guste, ya que viene cargado por defecto un subway para llegar y consultar, para cargar los archivos este debe estar en el mismo directorio del programa el cual es el siguiente \Lab3_NeiraJans_21163695\Codigofuente_21163695_JohanNeira\Lab3_NeiraJans_21163695
+4)Utilize el programa como le mas le guste, ya que viene cargado por defecto un subway para llegar y consultar, para cargar los archivos este debe estar en el mismo directorio del programa el cual es el siguiente 
+\Lab3_NeiraJans_21163695\Codigofuente_21163695_JohanNeira\Lab3_NeiraJans_21163695
 
-
+5)Para revisar el javadocs utlilizar la siguiente ruta Lab3_NeiraJans_21163695\JavaDocs_21163695_JohanNeira\org\example\package-summary
 
 PD: Se sugiere cargar todos los archivos antes de utilizar los addPassengercar y removePassengercar, ya que asi va a poder tener todos los ID que realmente se deben ocupar y se podra crear carros sin problemas.
 PD2: Tenga encuenta a la hora de crear los vagones que estos tienen ID unicos, por lo tanto si usted va a cargar archivos cree vagones desde los ID que indica en el archivo hacia adelante.

@@ -56,8 +56,8 @@ public class CargaDedatos implements UseCargaDedatos {
      * @param scanner
      * @param subway
      * @return Subway
-     * @Nombre loadFromFileTrain
-     * @Descripcion Metodo que carga las lineas a la Red de metro y el la Red de Metro
+     * Nombre loadFromFileTrain
+     * Descripcion Metodo que carga las lineas a la Red de metro y el la Red de Metro
      */
 
     @Override
@@ -175,8 +175,8 @@ public class CargaDedatos implements UseCargaDedatos {
      * @param subway
      * @param cargaDedatos
      * @return Subway
-     * @Nombre loadFromFileTrain
-     * @Descripcion Metodo que carga los trenes a la Red de metro y a la lineas correspondientes
+     * Nombre loadFromFileTrain
+     * Descripcion Metodo que carga los trenes a la Red de metro y a la lineas correspondientes
      */
     @Override
     public Subway loadFromFileTrain(Scanner scanner, Subway subway, CargaDedatos cargaDedatos) {
@@ -277,8 +277,8 @@ public class CargaDedatos implements UseCargaDedatos {
      * @param scanner
      * @param subway
      * @return Subway
-     * @Nombre loadFromFileDriver
-     * @Descripcion Metodo que carga los conductores a la Red de metro y los trenes correspondientes
+     * Nombre loadFromFileDriver
+     * Descripcion Metodo que carga los conductores a la Red de metro y los trenes correspondientes
      */
     @Override
     public Subway loadFromFileDriver(Scanner scanner, Subway subway) {
@@ -391,8 +391,8 @@ public class CargaDedatos implements UseCargaDedatos {
      * @param scanner
      * @param subway
      * @return Subway
-     * @Nombre loadFromFileCombination
-     * @Descripcion Metodo que carga las combinaciones a la Red de metro
+     * Nombre loadFromFileCombination
+     * Descripcion Metodo que carga las combinaciones a la Red de metro
      */
     @Override
     public Subway loadFromFileCombination(Scanner scanner, Subway subway) {

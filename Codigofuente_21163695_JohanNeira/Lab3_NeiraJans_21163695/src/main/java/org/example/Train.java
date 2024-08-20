@@ -144,7 +144,6 @@ public class Train implements UseTrain {
      * Descripcion Método que añade un carro en una posicion dada de un tren
      * @param passengerCar
      * @param position
-     * @return Train
      */
     @Override
     public void addCar(PassengerCar passengerCar, int position) {
@@ -176,7 +175,6 @@ public class Train implements UseTrain {
      * Descripcion Método que remueva un carro en la posicion dada de un tren
      * @param train
      * @param position
-     * @return Train
      */
     @Override
     public void removeCar(Train train, int position) {

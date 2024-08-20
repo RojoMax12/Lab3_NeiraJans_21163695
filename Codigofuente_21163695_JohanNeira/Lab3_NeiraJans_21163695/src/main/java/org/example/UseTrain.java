@@ -9,7 +9,6 @@ public interface UseTrain {
      * Descripcion Método que añade un carro en una posicion dada de un tren
      * @param passengerCar
      * @param position
-     * @return Train
      */
     public void addCar(PassengerCar passengerCar, int position);
 
@@ -18,7 +17,6 @@ public interface UseTrain {
      * Descripcion Método que remueva un carro en la posicion dada de un tren
      * @param train
      * @param position
-     * @return Train
      */
     public void removeCar(Train train, int position);
 

@@ -361,7 +361,7 @@ public class Subway implements UseSubway {
      *
      * @param train
      * @param time
-     * @return
+     * @return remainingPath
      */
     @Override
     public List<Station> trainPath(Train train, Date time) {
